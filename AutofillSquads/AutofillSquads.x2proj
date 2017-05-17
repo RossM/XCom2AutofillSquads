@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Default" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Guid>1891e545-3736-43a0-97be-fd4b4ad99e50</Guid>
+    <Name>Autofill Squads</Name>
+    <Description>Adds a button to automatically fill a squad with unassigned soldiers.</Description>
+    <SteamPublishID>0</SteamPublishID>
+    <AssemblyName>AutofillSquads</AssemblyName>
+    <RootNamespace>AutofillSquads</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Config\" />
+    <Folder Include="Content\" />
+    <Folder Include="Localization\" />
+    <Folder Include="Src\" />
+    <Folder Include="Src\AutofillSquads\" />
+    <Folder Include="Src\AutofillSquads\Classes\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Config\XComAutofillSquads.ini">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Localization\AutofillSquads.int">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ReadMe.txt" />
+    <Content Include="ModPreview.jpg" />
+    <Content Include="Config\XComEditor.ini" />
+    <Content Include="Config\XComEngine.ini" />
+    <Content Include="Config\XComGame.ini" />
+    <Content Include="Localization\XComGame.int" />
+    <Content Include="Src\AutofillSquads\Classes\UIScreenListener_UIPersonnel_SquadBarracks.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\AutofillSquads\Classes\X2DownloadableContentInfo_AutofillSquads.uc" />
+  </ItemGroup>
+  <Import Project="$(MSBuildLocalExtensionPath)\XCOM2.targets" />
+</Project>
