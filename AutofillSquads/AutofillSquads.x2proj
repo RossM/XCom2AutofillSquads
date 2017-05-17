@@ -7,6 +7,7 @@
     <SteamPublishID>0</SteamPublishID>
     <AssemblyName>AutofillSquads</AssemblyName>
     <RootNamespace>AutofillSquads</RootNamespace>
+    <ProjectGuid>{c8b8831d-5089-4037-bfb4-171cc2a8033a}</ProjectGuid>
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Config\" />
@@ -17,6 +18,9 @@
     <Folder Include="Src\AutofillSquads\Classes\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AutofillSquads.XComMod">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Config\XComAutofillSquads.ini">
       <SubType>Content</SubType>
     </Content>
@@ -35,4 +39,16 @@
     <Content Include="Src\AutofillSquads\Classes\X2DownloadableContentInfo_AutofillSquads.uc" />
   </ItemGroup>
   <Import Project="$(MSBuildLocalExtensionPath)\XCOM2.targets" />
+  <Target Name="ReplaceModInfo" AfterTargets="Build">
+    <ItemGroup>
+      <ModInfoFiles Include="@(Content)" Condition="'%(Extension)' == '.XComMod'">
+        <TargetDir>$(OutputDir)</TargetDir>
+        <TargetPath>$(OutputDir)%(Filename)%(Extension)</TargetPath>
+      </ModInfoFiles>
+    </ItemGroup>
+    <Message Importance="High" Text="Replacing mod info..." />
+    <Copy SourceFiles="@(ModInfoFiles)" SkipUnchangedFiles="true" DestinationFiles="%(TargetPath)">
+      <Output TaskParameter="CopiedFiles" ItemName="_CopiedFiles" />
+    </Copy>
+  </Target>
 </Project>
