@@ -50,6 +50,7 @@ function AutofillSquad(XComGameState_LWPersistentSquad SquadState)
 	local int Rank, BestRank;
 	local int UnassignedOfficers;
 	local float OfficerDensity;
+	local int i;
 
 	History = `XCOMHISTORY;
 
@@ -57,6 +58,17 @@ function AutofillSquad(XComGameState_LWPersistentSquad SquadState)
 
 	SquadSoldiers = SquadState.GetSoldiers();
 	UnassignedSoldiers = SquadMgr.GetUnassignedSoldiers();
+
+	// If this is a temporary squad, exclude soldiers not eligible to go on a mission
+	if (SquadState.bTemporary)
+	{
+		for (i = UnassignedSoldiers.Length; i >= 0; --i)
+		{
+			UnitState = XComGameState_Unit(History.GetGameStateForObjectID(UnassignedSoldiers[i].ObjectID));
+			if (UnitState.GetStatus() != eStatus_Active && UnitState.GetStatus() != eStatus_PsiTraining)
+				UnassignedSoldiers.Remove(i, 1);
+		}
+	}
 
 	foreach SquadSoldiers(UnitState)
 	{
